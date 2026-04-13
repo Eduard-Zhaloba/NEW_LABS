@@ -42,8 +42,9 @@ void SinglyLinkedList<T>::insert(int index, T data) {
         push_front(data);
        
     }
-    if (index > 0 and index < size) {
-        auto newNode = std::make_unique<Node<T>>(data);
+    if (index > 0 and index <= size) {
+        auto newNode = std::make_unique<Node<T>>();
+		newNode->data = data;
         Node<T>* current = head.get();
         for (int i = 0; i < index - 1; ++i) {
             current = current->next.get();

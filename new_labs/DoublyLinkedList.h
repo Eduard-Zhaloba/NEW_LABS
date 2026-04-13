@@ -16,4 +16,14 @@ private:
     int size = 0;
 public:
     DoublyLinkedList();
+    void push_front2(T value);
+    void push_back2(T value);
+	void delete_front2();
+    void delete_back2();
+	void get_value2(int index);
+    void insert2(int index, T data);
+    void remove2(int index);
+    friend std::ostream& operator<< <T>(std::ostream& out, const DoublyLinkedList<T>& list);
+
+    
 };

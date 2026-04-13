@@ -6,23 +6,41 @@ template <typename T>
 DoublyLinkedList<T>::DoublyLinkedList() : head(nullptr), tail(nullptr), size(0) {};
 
 template <typename T>
-void DoublyLinkedList<T>::remove2(int index) {
-    if (index == 0) {
-        delete_front2();
-        return;
-    }
-    if (index > 0 and index < size) {
-        Node2<T>* current = head.get();
-        for (int i = 0; i < index - 1; ++i) {
-            current = current->next.get();
+void DoublyLinkedList<T>::find2(T element) {
+    Node2<T>* current = head.get();
+    int index = 0;
+    while (current != nullptr) {
+        if (current->data == element) {
+            cout << "Element " << element << " found at index: " << index << endl;
+            return;
         }
-        std::unique_ptr<Node2<T>> temp = std::move(current->next);
-        temp = std::move(temp->next);
-		if (temp != nullptr) {
-			temp->prev = current->next.get();
-		}
-        current->next = std::move(temp);
-        size--;
+        current = current->next.get();
+        index++;
+    }
+    cout << "Element " << element << " not found in the list." << endl;
+}
+
+
+template <typename T>
+void DoublyLinkedList<T>::remove2(int index) {
+    if (size>0){
+        if (index == 0) {
+            delete_front2();
+            return;
+        }
+        if (index > 0 and index < size) {
+            Node2<T>* current = head.get();
+            for (int i = 0; i < index - 1; ++i) {
+                current = current->next.get();
+            }
+            std::unique_ptr<Node2<T>> temp = std::move(current->next);
+            temp = std::move(temp->next);
+		    if (temp != nullptr) {
+			    temp->prev = current->next.get();
+		    }
+            current->next = std::move(temp);
+            size--;
+        }
     }
     else {
         cout << "\nError: Index is out of bounds!" << endl;
@@ -160,9 +178,7 @@ void DoublyLinkedList<T>::push_back2(T value) {
 		newNode->prev = tail;
         tail->next = std::move(newNode);
         tail = NodePtr;
-        //NodePtr->prev = tail;
-        //tail->next = std::move(newNode);
-        //tail = NodePtr;
+        
     }
     size++;
 }

@@ -23,6 +23,7 @@ public:
 	void get_value2(int index);
     void insert2(int index, T data);
     void remove2(int index);
+    void find2(T element);
     friend std::ostream& operator<< <T>(std::ostream& out, const DoublyLinkedList<T>& list);
 
     
